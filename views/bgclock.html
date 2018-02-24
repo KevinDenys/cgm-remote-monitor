@@ -19,14 +19,16 @@
   
 	<style type="text/css">
 		@import url("//fonts.googleapis.com/css?family=Open+Sans:700");
-  
+  *{
+  box-sizing: border-box;
+}
 		body {
 			text-align: center;
 			margin: 0 0;
 			padding: 0;
 			overflow: hidden;
 			font-family: 'Open Sans';
-			color: white;
+			color: rgb(255, 255, 255);
 			background-color: white;
 		}
 		main {
@@ -41,12 +43,21 @@
 			height: 100vh;
 		}
 		.inner {
+		margin-top: 30px;
 			width: 100%;
 			-webkit-transform: translateY(-5%);
 		}
 		#bgnow {
-			font-weight: 700;
-			font-size: 40vmin;
+			color: rgb(255, 255, 255);
+			font-size: 7em;
+			margin: -70px;
+			padding: 0;
+		}
+		#clock {
+			color: rgb(255, 255, 255);
+			font-size: 10em;
+			margin: 0px;
+			padding: 0;
 		}
 		#trend {
 			display: -ms-flexbox;
@@ -61,11 +72,12 @@
 			flex-direction: column;
 		}
 		#arrowDiv {
+		margin: 40px;
 			flex-grow: 1;
 			text-align: center;
 		}
 		img#arrow {
-			height: 30vmin;
+			height: 10vmin;
 		}
 		#staleTime {
 			flex-grow: 1;
@@ -79,12 +91,14 @@
 
 	<main>
 		<div class="inner">
+		
+			<div id="clock"></div>
 			<div id="bgnow"></div>
 			<div id="trend">
 				<div id="arrowDiv"><img id="arrow" src=""/></div>
 				<div id="staleTime"></div>
 			</div>
-<div id="clock"></div>
+
 		</div>
 	</main>
   
@@ -104,7 +118,7 @@
 			var last = new Date(rec.date);
 			var now = new Date( );
 			var elapsedMins = Math.round(((now - last) / 1000) / 60);
-			var timeDivisor = (window.serverSettings.settings.timeFormat) ? window.serverSettings.settings.timeFormat : 12;
+			
 			var bgHigh = window.serverSettings.settings.thresholds.bgHigh;
 			var bgLow = window.serverSettings.settings.thresholds.bgLow;
 			var bgTargetBottom = window.serverSettings.settings.thresholds.bgTargetBottom;
@@ -117,12 +131,12 @@
 				bgTargetBottom = Nightscout.units.mgdlToMMOL(bgTargetBottom);
 				bgTargetTop = Nightscout.units.mgdlToMMOL(bgTargetTop);
 			}
-			
-var today = new Date(),
+			 var timeDivisor = (window.serverSettings.settings.timeFormat) ? window.serverSettings.settings.timeFormat : 12;
+			var today = new Date(),
             h = today.getHours() % timeDivisor || timeDivisor,
             m = today.getMinutes();
-      if (m < 10) m = "0" + m;
-      $('.clock').text(h + ":" + m);
+			if (m < 10) m = "0" + m;
+			$('#clock').text(h + ":" + m);
 
 			var bgNum = parseFloat(rec.sgv);
 			// These are the particular shades of red, yellow, green, and blue.
