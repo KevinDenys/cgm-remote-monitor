@@ -104,7 +104,7 @@
 			var last = new Date(rec.date);
 			var now = new Date( );
 			var elapsedMins = Math.round(((now - last) / 1000) / 60);
-			
+			var timeDivisor = (window.serverSettings.settings.timeFormat) ? window.serverSettings.settings.timeFormat : 12;
 			var bgHigh = window.serverSettings.settings.thresholds.bgHigh;
 			var bgLow = window.serverSettings.settings.thresholds.bgLow;
 			var bgTargetBottom = window.serverSettings.settings.thresholds.bgTargetBottom;
